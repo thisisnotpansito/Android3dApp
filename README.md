@@ -7,9 +7,9 @@ Proveer a creadores y diseñadores una herramienta móvil intuitiva para constru
 Lanzar una aplicación nativa en Android (MVP) que permita a los usuarios generar primitivas 3D, seleccionarlas mediante raycasting y exportar sus creaciones.
 
 ## Roles del Equipo
-* **Product Owner (PO):** [Nombre del estudiante]
-* **Scrum Master (SM):** [Nombre del estudiante]
-* **Equipo de Desarrollo:** [Nombres de los estudiantes]
+* **Product Owner (PO):** [Alexander Ricaurte]
+* **Scrum Master (SM):** [Cristian Meneses]
+* **Equipo de Desarrollo:** [Joan pedrozo y Erick Martinez]
 * **Rotación:** [Explicar brevemente cada cuántos sprints rotan los roles, ej. "Los roles de PO y SM rotarán cada 2 Sprints"].
 
 ## Tabla MoSCoW
