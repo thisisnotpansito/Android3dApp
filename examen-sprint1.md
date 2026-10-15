@@ -5,7 +5,7 @@
 - **Historia técnica:** HU-05 (Ver lista de Mis Modelos 3D) · **Otra Must:** HU-01 (Renderizar lienzo 3D base).
 
 ## 1. Persona y mapa de hoy
-- **Contexto:** Estudiante universitario de artes plásticas o ingeniería, 22 años. 
+- **Contexto:** Estudiantes universitarios de ingenieria informatica. 
 - **Teléfono y conexión:** Xiaomi Android gama media, conexión inestable cuando viaja en el bus.
 - **Quiere lograr:** Bocetar ideas geométricas espaciales (3D) rápidamente sin depender de un computador de escritorio.
 - **La frena:** Los motores 3D móviles actuales son extremadamente pesados, complejos y agotan la batería.
