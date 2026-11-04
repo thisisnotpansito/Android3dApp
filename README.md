@@ -39,8 +39,8 @@ decenas de fotos, **nuestro producto** parte de una sola foto y funciona en un c
 | Joan Pedrozo | Developer |
 | Erick Martinez | Developer · responsable de base de datos y documentación |
 
-Los cuatro son Developers. **Rotación:** *por definir por el equipo*. *(Los roles se toman del README anterior; la entrega
-del Sprint 1 los listaba distinto. El equipo debe confirmarlos.)*
+Los cuatro son Developers. Roles confirmados por el equipo el 4 de noviembre de 2026. **Rotación:** *por definir por el
+equipo*.
 
 ## Alcance (MoSCoW)
 

@@ -162,7 +162,6 @@ flowchart TB
 | El PR no tiene revisión | No se puede fusionar según la DoD | Revisión de otro integrante |
 | El tablero no está configurado | Falta lo que mide la rúbrica del Sprint 0 (columnas, campos, vistas) | Rol Write del dueño + `scripts/configurar-tablero.sh` |
 | INV-02 sin hacer | El objetivo dice «un estudiante de ingeniería», pero no se ha probado con ninguno | Dos entrevistas de 15 minutos |
-| Roles del equipo sin confirmar | La tabla «Quién hizo qué» no se puede cerrar | El equipo confirma PO, SM y desarrolladores |
 | `master` sin proteger | Se puede subir sin revisión | *Settings → Branches → Add rule* (lo hace el dueño) |
 
 ## Para la Review
