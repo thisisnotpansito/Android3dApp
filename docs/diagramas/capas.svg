@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" width="960" height="700" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <style>
+      .t  { font-size: 14px; font-weight: 600; fill: #0F172A; }
+      .s  { font-size: 11.5px; fill: #475569; }
+      .l  { font-size: 11.5px; fill: #334155; }
+      .h  { font-size: 13px; font-weight: 700; fill: #334155; }
+      .capa  { fill: #F8FAFC; stroke: #CBD5E1; stroke-width: 1.2; }
+      .caja  { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1.2; }
+      .clave { fill: #E0E7FF; stroke: #4F46E5; stroke-width: 2; }
+      .lado  { fill: #FFFFFF; stroke: #CBD5E1; stroke-width: 1.2; }
+      .a     { stroke: #64748B; stroke-width: 1.5; fill: none; marker-end: url(#f); }
+      .ad    { stroke: #64748B; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; marker-end: url(#f); }
+    </style>
+  </defs>
+  <rect width="960" height="700" fill="#FFFFFF"/>
+  <text x="30" y="34" style="font-size:18px;font-weight:700;fill:#0F172A">Cada capa solo conoce a la de abajo, a través de un contrato</text>
+  <text x="30" y="56" class="s">Arquitectura de Creative 3D Builder 1.0 · MVVM con StateFlow · app/src/main/java/com/example/android3dapp/</text>
+
+  <!-- Presentación -->
+  <rect x="30" y="75" width="660" height="205" rx="10" class="capa"/>
+  <text x="46" y="97" class="h">Presentación · ui/</text>
+  <rect x="50" y="108" width="620" height="58" rx="8" class="caja"/>
+  <text x="66" y="131" class="t">Pantallas (lo que se ve)</text>
+  <text x="66" y="152" class="s">InicioScreen · MisModelosScreen · DetalleModeloScreen · NuevoModeloScreen · comun/ (Aviso, EtiquetaEstado)</text>
+  <path d="M360 166 V200" class="a"/>
+  <text x="368" y="188" class="l">lee el estado (collectAsState) y pide acciones</text>
+  <rect x="50" y="202" width="620" height="68" rx="8" class="clave"/>
+  <text x="66" y="224" class="t">ViewModels (estado y decisiones de cada pantalla)</text>
+  <text x="66" y="243" class="s">MisModelosViewModel: Cargando · Vacio · Error · ConDatos</text>
+  <text x="66" y="260" class="s">DetalleModeloViewModel: Cargando · NoEncontrado · Error · Listo</text>
+
+  <!-- Dominio -->
+  <rect x="30" y="310" width="660" height="92" rx="10" class="capa"/>
+  <text x="46" y="332" class="h">Dominio · domain/</text>
+  <rect x="50" y="342" width="460" height="46" rx="8" class="caja"/>
+  <text x="66" y="363" class="t">Modelo y reglas, en Kotlin puro (sin Android)</text>
+  <text x="66" y="380" class="s">Modelo3D (id, nombre, creadoEn, estado, poligonos) · EstadoModelo</text>
+  <path d="M200 270 V340" class="a"/>
+  <text x="208" y="300" class="l">usa</text>
+
+  <!-- Datos -->
+  <rect x="30" y="432" width="660" height="150" rx="10" class="capa"/>
+  <text x="46" y="454" class="h">Datos · data/</text>
+  <rect x="50" y="466" width="300" height="100" rx="8" class="caja"/>
+  <text x="66" y="489" class="t">Implementaciones</text>
+  <text x="66" y="511" class="s">RepositorioSimulado ✔ (4 escenarios, 1,5 s)</text>
+  <text x="66" y="531" class="s">RepositorioRemoto · API (entregable 2)</text>
+  <text x="66" y="551" class="s">FuenteFotos · cámara y galería (entregable 2)</text>
+  <rect x="390" y="466" width="280" height="100" rx="8" class="clave"/>
+  <text x="406" y="489" class="t">Contrato (interfaz)</text>
+  <text x="406" y="511" class="s">ModeloRepository</text>
+  <text x="406" y="531" class="s">obtenerTodos() · obtenerPorId(id)</text>
+  <text x="406" y="551" class="s">ErrorDeLectura</text>
+  <path d="M350 516 H388" class="a"/>
+  <text x="369" y="503" text-anchor="middle" class="l" style="font-size:10px">implementa</text>
+  <path d="M600 270 V464" class="a"/>
+  <text x="608" y="420" class="l">pide los datos</text>
+
+  <!-- Plataforma -->
+  <rect x="30" y="612" width="660" height="70" rx="10" class="capa"/>
+  <text x="46" y="634" class="h">Plataforma</text>
+  <text x="46" y="656" class="s">Jetpack Compose · Material 3 · Navigation Compose · Lifecycle ViewModel · Coroutines</text>
+  <text x="46" y="672" class="s">Más adelante: SceneView (visor 360°, entregable 2) · ARCore (realidad aumentada, entregable 3)</text>
+  <path d="M200 566 V610" class="a"/>
+  <text x="208" y="594" class="l">llama a</text>
+
+  <!-- Lado: composición -->
+  <rect x="720" y="75" width="210" height="205" rx="10" class="lado"/>
+  <text x="736" y="98" class="h">Composición · app/</text>
+  <text x="736" y="124" class="s">AppContenedor elige la</text>
+  <text x="736" y="140" class="s">implementación del contrato:</text>
+  <text x="736" y="160" class="t" style="font-size:12px">RepositorioSimulado()</text>
+  <text x="736" y="180" class="s">En el entregable 2 se cambia</text>
+  <text x="736" y="196" class="s">esa sola línea por la API.</text>
+  <text x="736" y="224" class="s">Navegacion: rutas inicio,</text>
+  <text x="736" y="240" class="s">modelos, modelos/{id}, nuevo.</text>
+  <path d="M720 232 H672" class="a"/>
+
+  <!-- Lado: pruebas -->
+  <rect x="720" y="432" width="210" height="150" rx="10" class="lado"/>
+  <text x="736" y="455" class="h">Pruebas · test/</text>
+  <text x="736" y="480" class="s">MisModelosViewModelTest:</text>
+  <text x="736" y="496" class="s">6 pruebas de los ViewModel</text>
+  <text x="736" y="520" class="s">Un repositorio falso cumple</text>
+  <text x="736" y="536" class="s">el mismo contrato: corren sin</text>
+  <text x="736" y="552" class="s">teléfono ni base de datos.</text>
+  <path d="M720 516 H672" class="ad"/>
+</svg>
