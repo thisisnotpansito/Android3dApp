@@ -9,14 +9,11 @@
 | Etiquetas `historia`, `tecnica`, `defecto`, `investigacion`, `bloqueada` | ✔ Hecho | `scripts/crear-backlog.sh` |
 | Hitos por entregable (1, 2 y 3) | ✔ Hecho | `scripts/crear-backlog.sh` |
 | 24 issues con ID (HU- / TEC- / INV-), cuerpo con historia, criterios y metadatos | ✔ Hecho (#14–#37) | `scripts/crear-backlog.sh` |
-| Nombre, descripción (Objetivo del Producto) y README del proyecto | ⏳ Pendiente de permiso | `scripts/configurar-tablero.sh` |
-| Status con seis columnas | ⏳ Pendiente de permiso | `scripts/configurar-tablero.sh` |
-| Campos Tipo, Prioridad, Épica y Puntos, con valores en cada tarjeta | ⏳ Pendiente de permiso | `scripts/configurar-tablero.sh` |
-| Límites WIP, campo Sprint, tres vistas y workflows | ⏳ A mano (la API no lo permite) | Pasos de abajo |
-
-> **Por qué está pendiente:** el proyecto pertenece a la cuenta `thisisnotpansito` y los demás integrantes aún no tienen
-> rol **Write** en él. El dueño lo da en *Project → ⋯ → Settings → Manage access* (Write a cada integrante, Read al
-> docente). Después, cualquiera corre `./scripts/configurar-tablero.sh`.
+| Nombre «Creative 3D Builder», descripción (Objetivo del Producto) y README del proyecto | ✔ Hecho | `scripts/configurar-tablero.sh` |
+| Status con seis columnas; cada tarjeta en su columna (#1–#12 en Backlog, PR #38 en «En revisión») | ✔ Hecho | `scripts/configurar-tablero.sh` |
+| Campos Tipo, Prioridad, Épica y Puntos, con valores en las 24 tarjetas del backlog nuevo | ✔ Hecho | `scripts/configurar-tablero.sh` |
+| Campo **Sprint** (iteración de 1 semana): *Entregable 1* · *Entregable 2 · semana 1 y 2* · *Entregable 3 · semana 1 y 2*; los elementos del entregable 1 asignados | ✔ Hecho | API de GraphQL (`createProjectV2Field`) |
+| Límites WIP, tres vistas y workflows | ⏳ A mano (la API no lo permite) | Pasos de abajo |
 
 ## 1. Columnas, límites y campos
 
