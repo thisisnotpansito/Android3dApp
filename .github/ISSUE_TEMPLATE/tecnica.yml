@@ -1,0 +1,23 @@
+name: Tarea técnica
+description: Trabajo necesario que el usuario no ve directamente (proyecto, base de datos, API, build)
+title: "TEC-XX: "
+labels: ["tecnica"]
+body:
+  - type: textarea
+    id: que
+    attributes:
+      label: Qué
+      description: Qué se construye y por qué hace falta.
+    validations:
+      required: true
+  - type: textarea
+    id: hecho
+    attributes:
+      label: Hecho cuando
+      value: |
+        - [ ] ...
+        - [ ] Ninguna credencial queda en el repositorio
+  - type: textarea
+    id: notas
+    attributes:
+      label: Notas técnicas o dudas

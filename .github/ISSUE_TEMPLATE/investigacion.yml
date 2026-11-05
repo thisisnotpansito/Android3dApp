@@ -1,0 +1,22 @@
+name: Investigación o validación
+description: Entrevistas, pruebas con usuarios, comparación de opciones o documentación
+title: "INV-XX: "
+labels: ["investigacion"]
+body:
+  - type: textarea
+    id: pregunta
+    attributes:
+      label: Qué queremos saber
+      description: La pregunta que responde este elemento.
+    validations:
+      required: true
+  - type: textarea
+    id: como
+    attributes:
+      label: Cómo lo vamos a averiguar
+      description: A quién, cuándo y con qué. Si es con personas, preguntas sobre hechos pasados («Cuénteme la última vez que…»).
+  - type: textarea
+    id: resultado
+    attributes:
+      label: Resultado esperado
+      description: Dónde queda la respuesta (comentario de este issue, archivo en docs/).

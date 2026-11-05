@@ -1,0 +1,47 @@
+name: Historia de usuario
+description: Un elemento del Product Backlog con valor para el usuario
+title: "HU-XX: "
+labels: ["historia"]
+body:
+  - type: textarea
+    id: historia
+    attributes:
+      label: Historia
+      description: Como [usuario], quiero [acción] para [beneficio].
+      placeholder: Como estudiante, quiero ... para ...
+    validations:
+      required: true
+  - type: textarea
+    id: criterios
+    attributes:
+      label: Criterios de aceptación
+      description: Tres escenarios como mínimo (éxito, error y uno propio del celular). Formato Dado / Cuando / Entonces.
+      value: |
+        - [ ] **Éxito.** Dado ... cuando ... entonces ...
+        - [ ] **Error.** Dado ... cuando ... entonces ...
+        - [ ] **Celular** (sin conexión, permiso negado, lista vacía o pantalla pequeña). Dado ... cuando ... entonces ...
+  - type: textarea
+    id: lista
+    attributes:
+      label: Lista para construir
+      description: Definición de Terminado de la fase de Exploración.
+      value: |
+        - [ ] Criterios verificables, revisados por otra persona
+        - [ ] Pantalla en el prototipo de Figma
+        - [ ] Validada con un usuario real (INV-02)
+  - type: dropdown
+    id: prioridad
+    attributes:
+      label: Prioridad (MoSCoW)
+      options: [Must, Should, Could]
+    validations:
+      required: true
+  - type: dropdown
+    id: entregable
+    attributes:
+      label: Entregable
+      options: ["1 · Fase inicial", "2 · Foto a modelo 3D", "3 · Realidad aumentada"]
+  - type: textarea
+    id: notas
+    attributes:
+      label: Notas técnicas o dudas
