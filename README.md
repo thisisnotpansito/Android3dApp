@@ -5,10 +5,10 @@
 Proyecto del curso *Desarrollo de Aplicaciones Móviles* (Ingeniería Informática, VIII semestre, UNIPAZ), equipo
 **Los Chontos**. Marco de trabajo: Scrumban con fases de Mobile-D.
 
-> **Estado: entregable 1 · fase inicial.** La interfaz de la app está construida con datos simulados (inicio, Mis Modelos
-> 3D con sus cuatro estados, detalle y nuevo modelo) y el esquema de la base de datos de los tres entregables está
-> creado en Neon (PostgreSQL). La app **aún no se conecta** a la base: eso llega con la API en el entregable 2. Falta
-> probarlo en el teléfono del equipo. Detalle en [`docs/entregables/entregable-1.md`](docs/entregables/entregable-1.md).
+> **Estado: entregable 2 · foto a modelo 3D (versión 2.0).** Se toma o se elige una foto, la app genera un modelo 3D
+> real (`.glb`) **en el teléfono** y se puede **girar en 360°**. Los modelos quedan guardados y la app trae dos de
+> demostración (una taza y un cactus). La API en Cloudflare Workers + Neon está escrita pero **sin desplegar**. Falta
+> probarlo en el Xiaomi. Detalle en [`docs/entregables/entregable-2.md`](docs/entregables/entregable-2.md).
 
 ## Objetivo del Producto
 
@@ -26,8 +26,8 @@ decenas de fotos, **nuestro producto** parte de una sola foto y funciona en un c
 
 | Entregable | El usuario puede… | Hito de GitHub | Estado |
 |---|---|---|---|
-| **1 · Fase inicial** | Abrir la app y recorrer su interfaz con datos de prueba; base de datos creada | *Entregable 1 · Fase inicial* | Construido |
-| **2 · Foto a modelo 3D** | Tomar una foto, obtener su modelo 3D y girarlo en 360° | *Entregable 2 · Foto a modelo 3D* | Backlog |
+| **1 · Fase inicial** | Abrir la app y recorrer su interfaz con datos de prueba; base de datos creada | *Entregable 1 · Fase inicial* | Fusionado (PR #38) |
+| **2 · Foto a modelo 3D** | Tomar una foto, obtener su modelo 3D y girarlo en 360° | *Entregable 2 · Foto a modelo 3D* | Construido · API sin desplegar |
 | **3 · Realidad aumentada** | Ver el modelo sobre una mesa o el piso a través de la cámara | *Entregable 3 · Realidad aumentada* | Backlog |
 
 ## Roles del equipo
@@ -67,21 +67,26 @@ el entregable 2) y pagos.
 | Flujo de trabajo y Definición de Terminado | [`docs/flujo-de-trabajo.md`](docs/flujo-de-trabajo.md) |
 | Criterios de aceptación (Gherkin) | [`docs/criterios/`](docs/criterios/) |
 | Base de datos: diagrama, diccionario y decisiones | [`docs/base-de-datos.md`](docs/base-de-datos.md) · [`db/`](db/) |
-| Registro del entregable 1 | [`docs/entregables/entregable-1.md`](docs/entregables/entregable-1.md) |
+| Registro de los entregables | [1](docs/entregables/entregable-1.md) · [2](docs/entregables/entregable-2.md) |
+| INV-05 · cómo se genera el 3D | [`docs/inv-05-servicio-imagen-3d.md`](docs/inv-05-servicio-imagen-3d.md) |
+| API (Cloudflare Workers) | [`api/`](api/) |
 | Informe formal del entregable 1 (APA 7) | [Word](docs/entregables/Informe-Entregable-1.docx) · [PDF](docs/entregables/Informe-Entregable-1.pdf) |
-| Capturas | [`docs/capturas/entregable-1/`](docs/capturas/entregable-1/) |
+| Capturas | [entregable 1](docs/capturas/entregable-1/) · [entregable 2](docs/capturas/entregable-2/) |
 | Examen del Sprint 1 | [`examen-sprint1.md`](examen-sprint1.md) |
 
 ## Arquitectura (MVVM)
 
 ```
 app/src/main/java/com/example/android3dapp/
-├── domain/      Modelo3D y EstadoModelo: Kotlin puro, mismos campos que la tabla `modelos`
-├── data/        ModeloRepository (contrato) y RepositorioSimulado (4 escenarios, 1,5 s de espera)
-├── ui/          Una carpeta por pantalla: inicio/ · modelos/ · detalle/ · nuevo/ · comun/ · theme/
+├── domain/      Modelo3D, EstadoModelo y NuevoModelo: Kotlin puro, mismos campos que la tabla `modelos`
+├── data/        ModeloRepository (contrato) · RepositorioSimulado + AlmacenLocal (en el teléfono) · RepositorioRemoto (API)
+│   ├── generacion/  GeneradorModelo3D (contrato) · MallaInflada (foto → malla) · EscritorGlb (malla → .glb)
+│   └── fotos/       LectorFotos (EXIF, 1600 px, JPEG)
+├── ui/          Una carpeta por pantalla: inicio/ · modelos/ · detalle/ · nuevo/ · visor/ · comun/ · theme/
 │                Cada pantalla lee su ViewModel (StateFlow) y nunca llama al repositorio
 └── app/         AppContenedor (elige la implementación) y Navegacion (rutas, detalle por id)
 db/              Migraciones y semillas de PostgreSQL (Neon)
+api/             API en Cloudflare Workers (TypeScript): Neon + Workers KV
 ```
 
 **La regla:** las pantallas solo hablan con su ViewModel, y los ViewModel solo con el **contrato**. Por eso cambiar los
@@ -93,13 +98,16 @@ Requisitos: Android Studio (trae su propio JDK), Android SDK 37 y un Android con
 
 ```bash
 ./gradlew assembleDebug        # compila el APK
-./gradlew testDebugUnitTest    # 7 pruebas
+./gradlew testDebugUnitTest    # 16 pruebas
 ./gradlew lintDebug            # meta: 0 errores
 ./gradlew installDebug         # instala en el teléfono conectado
 ```
 
 En la pantalla «Mis Modelos 3D» de una compilación de depuración, el botón **Escenario** cambia entre *Con datos*,
 *Vacía*, *Falla* y *Cargando*.
+
+**Crear un modelo:** Inicio → «Crear desde una foto» → «Tomar foto» o «Galería» → nombre → «Generar modelo 3D» → en el
+detalle, «Girar en 360°». Mejor con el objeto centrado sobre un fondo liso.
 
 ## Flujo de trabajo
 
@@ -114,7 +122,8 @@ En la pantalla «Mis Modelos 3D» de una compilación de depuración, el botón 
 | Entregable | Objetivo | Puntos | Resultado |
 |---|---|---|---|
 | Sprint 1 (examen) | La lista de «Mis Modelos 3D» funciona en un Android con sus cuatro situaciones | — | PR #13 fusionado |
-| 1 · Fase inicial | Interfaz completa con datos simulados y esquema de base de datos creado en Neon | 15 | Construido · falta probarlo en el Xiaomi |
+| 1 · Fase inicial | Interfaz completa con datos simulados y esquema de base de datos creado en Neon | 15 | Fusionado (PR #38) · falta probarlo en el Xiaomi |
+| 2 · Foto a modelo 3D | Un estudiante toma o elige la foto de un objeto y, en segundos, lo ve en 3D y lo gira en 360° | 25 | Construido · API sin desplegar · falta probarlo en el Xiaomi |
 
 ---
 Desarrollo de Aplicaciones Móviles · Ingeniería Informática · UNIPAZ · 2026
