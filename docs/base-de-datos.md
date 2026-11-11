@@ -134,6 +134,14 @@ por formato y modelo (`UNIQUE (modelo_id, formato)`).
 | Tipos `ENUM` | Texto libre | La base rechaza estados que la app no conoce |
 | Migraciones numeradas + `esquema_version` | Editar el SQL a mano | Mismo patrón que `versionEsquema` del proyecto modelo del curso |
 
+## Cambio del entregable 2: archivos en Workers KV
+
+R2 exige activarlo en el panel de Cloudflare con un método de pago. Los archivos van a **Workers KV**
+(`creative-3d-builder-archivos`, gratis y con hasta 25 MiB por archivo), con las claves `fotos/<id>.jpg` y
+`modelos/<id>.glb`. Las columnas `fotos.clave_r2` y `archivos_modelo.clave_r2` **conservan su nombre** y guardan esa
+clave de KV: renombrarlas exigiría una migración sobre la base en uso, y se dejó como decisión del equipo. La API que las
+llena está en [`../api/`](../api/).
+
 ## Cómo se crea o se recrea
 
 Ver [`../db/README.md`](../db/README.md).

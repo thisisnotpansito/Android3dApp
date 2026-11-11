@@ -1,0 +1,7 @@
+node_modules/
+.cf/
+.wrangler/
+dist/
+.dev.vars
+.env
+*.secrets
