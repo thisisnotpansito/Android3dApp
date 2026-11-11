@@ -59,6 +59,25 @@ class MisModelosViewModel(
         }
     }
 
+    /**
+     * Al volver a la lista (después de crear o borrar un modelo) se recarga sin mostrar
+     * «cargando» si ya había datos: la lista no parpadea.
+     */
+    fun refrescar() {
+        if (carga?.isActive == true) return
+        val anterior = _estado.value as? MisModelosUiState.ConDatos ?: return cargar()
+        carga = viewModelScope.launch {
+            _estado.value = try {
+                val modelos = repositorio.obtenerTodos().sortedByDescending { it.creadoEnMillis }
+                if (modelos.isEmpty()) MisModelosUiState.Vacio else MisModelosUiState.ConDatos(modelos)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                anterior
+            }
+        }
+    }
+
     fun elegirEscenario(escenario: Escenario) {
         (repositorio as? RepositorioSimulado)?.escenario = escenario
         cargar()

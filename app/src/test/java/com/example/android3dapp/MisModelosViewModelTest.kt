@@ -83,6 +83,9 @@ class MisModelosViewModelTest {
         val falso = object : ModeloRepository {
             override suspend fun obtenerTodos(): List<Modelo3D> = throw ErrorDeLectura("sin red")
             override suspend fun obtenerPorId(id: String): Modelo3D? = null
+            override suspend fun crear(nuevo: com.example.android3dapp.domain.NuevoModelo): Modelo3D = throw UnsupportedOperationException()
+            override suspend fun obtenerArchivo3D(id: String): ByteArray = throw ErrorDeLectura("sin red")
+            override suspend fun eliminar(id: String) = Unit
         }
         val vm = MisModelosViewModel(falso)
         advanceUntilIdle()

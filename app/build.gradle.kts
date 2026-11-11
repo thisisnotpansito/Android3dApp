@@ -13,10 +13,15 @@ android {
         applicationId = "com.example.android3dapp"
         minSdk = 24
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "2.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // TEC-05 · URL de la API (Cloudflare Workers). Vacía = datos de prueba en memoria.
+        // Se define en gradle.properties: creative3d.apiUrl=https://…
+        val apiUrl = providers.gradleProperty("creative3d.apiUrl").getOrElse("")
+        buildConfigField("String", "API_URL", "\"$apiUrl\"")
     }
 
     buildTypes {
@@ -32,6 +37,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

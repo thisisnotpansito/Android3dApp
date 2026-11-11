@@ -44,8 +44,8 @@ fun InicioScreen(alVerModelos: () -> Unit, alCrear: () -> Unit) {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Spacer(Modifier.height(4.dp))
-        Paso(1, "Toma una foto", "Fotografía el objeto con la cámara o elígelo de la galería.", "Entregable 2")
-        Paso(2, "Gíralo en 360°", "La app genera el modelo 3D y lo puedes ver desde todos sus ángulos.", "Entregable 2")
+        Paso(1, "Toma una foto", "Fotografía el objeto con la cámara o elígelo de la galería.", "Disponible")
+        Paso(2, "Gíralo en 360°", "La app genera el modelo 3D y lo puedes ver desde todos sus ángulos.", "Disponible")
         Paso(3, "Míralo en tu espacio", "Ponlo sobre una mesa o el piso a través de la cámara.", "Entregable 3")
         Spacer(Modifier.height(8.dp))
         Button(onClick = alVerModelos, modifier = Modifier.fillMaxWidth()) { Text("Ver mis modelos 3D") }

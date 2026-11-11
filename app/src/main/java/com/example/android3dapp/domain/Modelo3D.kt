@@ -23,4 +23,19 @@ data class Modelo3D(
     val creadoEnMillis: Long,
     val estado: EstadoModelo,
     val poligonos: Int?,
+    /** Tiene su archivo .glb (tabla `archivos_modelo`): se puede girar en 360°. */
+    val tieneArchivo3D: Boolean = false,
+    /** Mensaje del último intento fallido (tabla `trabajos_generacion`). */
+    val mensajeError: String? = null,
+)
+
+/** HU-07 + HU-02 · Lo que se envía para guardar un modelo recién generado. */
+class NuevoModelo(
+    val nombre: String,
+    val fotoJpeg: ByteArray,
+    val anchoPx: Int,
+    val altoPx: Int,
+    val glb: ByteArray,
+    val poligonos: Int,
+    val proveedor: String,
 )

@@ -14,10 +14,12 @@ sealed interface DetalleUiState {
     data object Cargando : DetalleUiState
     data object NoEncontrado : DetalleUiState
     data object Error : DetalleUiState
-    data class Listo(val modelo: Modelo3D) : DetalleUiState
+    data class Listo(val modelo: Modelo3D, val borrando: Boolean = false, val errorAlBorrar: Boolean = false) : DetalleUiState
+    /** HU-10 · Se borró: la pantalla vuelve a la lista. */
+    data object Borrado : DetalleUiState
 }
 
-/** HU-04 · Carga un modelo por su id para la pantalla de detalle. */
+/** HU-04 · Carga un modelo por su id para la pantalla de detalle. HU-10 · lo borra. */
 class DetalleModeloViewModel(
     private val id: String,
     private val repositorio: ModeloRepository,
@@ -39,6 +41,22 @@ class DetalleModeloViewModel(
                 throw e
             } catch (e: Exception) {
                 DetalleUiState.Error
+            }
+        }
+    }
+
+    fun borrar() {
+        val actual = _estado.value as? DetalleUiState.Listo ?: return
+        if (actual.borrando) return // doble toque
+        _estado.value = actual.copy(borrando = true, errorAlBorrar = false)
+        viewModelScope.launch {
+            _estado.value = try {
+                repositorio.eliminar(id)
+                DetalleUiState.Borrado
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                actual.copy(borrando = false, errorAlBorrar = true)
             }
         }
     }

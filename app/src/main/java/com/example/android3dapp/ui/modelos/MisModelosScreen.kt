@@ -47,6 +47,8 @@ fun MisModelosScreen(
     alVolver: () -> Unit,
 ) {
     val estado by vm.estado.collectAsState()
+    // Cada vez que la lista vuelve a la pantalla (por ejemplo, después de crear un modelo).
+    androidx.compose.runtime.LaunchedEffect(Unit) { vm.refrescar() }
     val esDepuracion = (LocalContext.current.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
 
     Scaffold(
