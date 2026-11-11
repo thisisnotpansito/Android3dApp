@@ -6,9 +6,8 @@ Proyecto del curso *Desarrollo de Aplicaciones Móviles* (Ingeniería Informáti
 **Los Chontos**. Marco de trabajo: Scrumban con fases de Mobile-D.
 
 > **Estado: entregable 2 · foto a modelo 3D (versión 2.0).** Se toma o se elige una foto, la app genera un modelo 3D
-> real (`.glb`) **en el teléfono** y se puede **girar en 360°**. Los modelos quedan guardados y la app trae dos de
-> demostración (una taza y un cactus). La API en Cloudflare Workers + Neon está escrita pero **sin desplegar**. Falta
-> probarlo en el Xiaomi. Detalle en [`docs/entregables/entregable-2.md`](docs/entregables/entregable-2.md).
+> real (`.glb`) **en el teléfono**, lo sube a la **API en Cloudflare Workers**, que lo guarda en **Neon**, y se puede
+> **girar en 360°**. Hay dos modelos subidos (una taza y un cactus). Falta probarlo en el Xiaomi. Detalle en [`docs/entregables/entregable-2.md`](docs/entregables/entregable-2.md).
 
 ## Objetivo del Producto
 
@@ -27,7 +26,7 @@ decenas de fotos, **nuestro producto** parte de una sola foto y funciona en un c
 | Entregable | El usuario puede… | Hito de GitHub | Estado |
 |---|---|---|---|
 | **1 · Fase inicial** | Abrir la app y recorrer su interfaz con datos de prueba; base de datos creada | *Entregable 1 · Fase inicial* | Fusionado (PR #38) |
-| **2 · Foto a modelo 3D** | Tomar una foto, obtener su modelo 3D y girarlo en 360° | *Entregable 2 · Foto a modelo 3D* | Construido · API sin desplegar |
+| **2 · Foto a modelo 3D** | Tomar una foto, obtener su modelo 3D y girarlo en 360° | *Entregable 2 · Foto a modelo 3D* | Construido · API publicada |
 | **3 · Realidad aumentada** | Ver el modelo sobre una mesa o el piso a través de la cámara | *Entregable 3 · Realidad aumentada* | Backlog |
 
 ## Roles del equipo
@@ -123,7 +122,7 @@ detalle, «Girar en 360°». Mejor con el objeto centrado sobre un fondo liso.
 |---|---|---|---|
 | Sprint 1 (examen) | La lista de «Mis Modelos 3D» funciona en un Android con sus cuatro situaciones | — | PR #13 fusionado |
 | 1 · Fase inicial | Interfaz completa con datos simulados y esquema de base de datos creado en Neon | 15 | Fusionado (PR #38) · falta probarlo en el Xiaomi |
-| 2 · Foto a modelo 3D | Un estudiante toma o elige la foto de un objeto y, en segundos, lo ve en 3D y lo gira en 360° | 25 | Construido · API sin desplegar · falta probarlo en el Xiaomi |
+| 2 · Foto a modelo 3D | Un estudiante toma o elige la foto de un objeto y, en segundos, lo ve en 3D y lo gira en 360° | 25 | Construido · API publicada · falta probarlo en el Xiaomi |
 
 ---
 Desarrollo de Aplicaciones Móviles · Ingeniería Informática · UNIPAZ · 2026

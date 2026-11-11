@@ -6,18 +6,19 @@
 ## Veredicto
 
 **Funciona de punta a punta en el teléfono:** se toma o se elige una foto, la app genera un modelo 3D real (`.glb`), lo
-guarda y se puede girar en 360°. Hay dos modelos de demostración —una taza y un cactus— que vienen dentro de la app. Lo
-que **no** está hecho: la API no está desplegada (falta la aprobación del equipo), así que hoy los modelos se guardan en
-el teléfono y no en Neon. Y el 3D es una **aproximación** (inflado de silueta), no una reconstrucción completa con IA.
+sube a la **API publicada en Cloudflare**, que lo guarda en **Neon** (datos) y Workers KV (archivos), y se puede girar
+en 360°. Hay dos modelos subidos —una taza y un cactus— y además vienen dentro de la app para usarla sin red. Lo que
+falta: el 3D es una **aproximación** (inflado de silueta), no una reconstrucción completa con IA, y no se ha probado en
+el Xiaomi.
 
 | Parte del entregable | Estado | Por qué |
 |---|---|---|
 | «Subir una foto…» (cámara o galería) | **Construido** | Probado con la galería en el emulador; la cámara usa la app de cámara del teléfono (falta probarla en el Xiaomi) |
 | «…y que la app me permita modelarlo 3D» | **Construido** | Generador en el teléfono (`MallaInflada` + `EscritorGlb`); unos 8 000 polígonos |
 | «…girarlo en 360° y verlo por todos sus ángulos» | **Construido** | Visor SceneView: arrastrar gira, pellizcar acerca |
-| Que los modelos queden guardados | **Construido** | En el teléfono (`AlmacenLocal`); sobreviven al cerrar la app |
-| Dos modelos listos para mostrar | **Hecho** | `assets/demos/`: «Taza UNIPAZ» y «Cactus en matera» |
-| API + base de datos (Hito 3) | **Parcial** | API escrita y tipada, KV creado; **falta desplegarla** y conectar la app |
+| Que los modelos queden guardados | **Construido** | En Neon a través de la API; sin API, en el teléfono (`AlmacenLocal`) |
+| Dos modelos listos para mostrar | **Hecho** | «Taza UNIPAZ» y «Cactus en matera», subidos desde la app a Neon; copia en `assets/demos/` |
+| API + base de datos (Hito 3) | **Construido** | <https://creative-3d-builder-api.creative3dbuilder.workers.dev> · prueba de humo 8/8 · la app la usa |
 | Probado en el Xiaomi | **Pendiente** | — |
 
 ## Sprint Planning
@@ -33,8 +34,8 @@ el teléfono y no en Neon. Y el 3D es una **aproximación** (inflado de silueta)
 | HU-08 | Ver el estado de la generación (#29) | 2 | Construido |
 | HU-14 | Reintentar una generación fallida (#37) | 2 | Construido |
 | HU-10 | Borrar un modelo (#30) | 2 | Construido |
-| TEC-05 | API en Cloudflare Workers conectada a Neon (#24) | 5 | Escrita, **sin desplegar** |
-| TEC-06 | Almacenamiento de fotos y modelos (#25) | 3 | KV creado; R2 cambiado por KV |
+| TEC-05 | API en Cloudflare Workers conectada a Neon (#24) | 5 | Publicada y en uso por la app |
+| TEC-06 | Almacenamiento de fotos y modelos (#25) | 3 | Workers KV en uso (R2 cambiado por KV) |
 
 **Decisiones técnicas:**
 
@@ -95,7 +96,8 @@ el teléfono y no en Neon. Y el 3D es una **aproximación** (inflado de silueta)
 | 6 | ![](../capturas/entregable-2/06-modelo-creado.png) | Detalle del modelo nuevo, «Listo», con polígonos |
 | 7 | ![](../capturas/entregable-2/07-visor-360-frente.png) | Visor 360° |
 | 8 | ![](../capturas/entregable-2/08-visor-360-girado.png) | El mismo modelo girado |
-| 9 | ![](../capturas/entregable-2/09-mis-modelos.png) | «Mis Modelos 3D» con los dos modelos de demostración |
+| 9 | ![](../capturas/entregable-2/09-mis-modelos.png) | «Mis Modelos 3D» leída desde la API: los dos modelos subidos y los datos de ejemplo de Neon |
+| 10 | ![](../capturas/entregable-2/10-visor-desde-la-api.png) | Visor 360° con el .glb descargado de la API |
 
 Fotos de origen de las demostraciones: [`../demos/`](../demos/).
 
@@ -103,7 +105,6 @@ Fotos de origen de las demostraciones: [`../demos/`](../demos/).
 
 | Brecha | Efecto | Qué la cierra |
 |---|---|---|
-| La API no está desplegada | Los modelos no llegan a Neon; el Hito 3 aún no cuenta con API en uso | Que el equipo apruebe `cf deploy` y se ponga la URL en `gradle.properties` |
 | El 3D es una aproximación | La parte de atrás repite la de adelante | Un servicio de IA con presupuesto (INV-05) |
 | Sin prueba en el Xiaomi | Nada pasa a «Hecho» | Instalar el APK y llenar la columna «Xiaomi» |
 | La API no tiene inicio de sesión | Cualquiera con la URL podría escribir | Decidir si hay cuentas (decisión abierta desde el entregable 1) |

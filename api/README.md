@@ -34,6 +34,8 @@ cf auth login                            # una vez
 # La cadena de Neon va como SECRETO, desde un archivo fuera del repositorio:
 #   { "DATABASE_URL": "postgresql://…" }
 cf deploy --secrets-file ../../secretos-api.json
+# La primera vez, Cloudflare pide registrar un subdominio workers.dev en el panel
+# (Workers & Pages → Account details → Subdomain). El equipo usa «creative3dbuilder».
 ```
 
 Después de desplegar, pon la URL en `gradle.properties` y vuelve a compilar la app:
@@ -50,7 +52,8 @@ Sin esa línea, la app guarda los modelos en el teléfono (`AlmacenLocal`).
 |---|---|
 | Código de la API y tipos (`tsc --noEmit`) | ✔ Listo |
 | KV `creative-3d-builder-archivos` | ✔ Creado en la cuenta de Cloudflare |
-| Despliegue del Worker | ⏳ **Pendiente de aprobación del equipo** (publica un servicio en producción) |
+| Despliegue del Worker | ✔ Publicado: <https://creative-3d-builder-api.creative3dbuilder.workers.dev> |
+| Prueba de humo (lista, 404, crear, bajar .glb, validación, borrar) | ✔ 8 de 8 |
 
 ## Riesgo conocido
 

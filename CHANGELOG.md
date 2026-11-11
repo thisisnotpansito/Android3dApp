@@ -12,8 +12,8 @@
 - **HU-01:** visor 360° con SceneView: arrastrar para girar y pellizcar para acercar.
 - **HU-10:** «Borrar modelo» en el detalle, con confirmación.
 - Persistencia en el teléfono (`AlmacenLocal`) y dos modelos de demostración en `assets/demos/` (taza y cactus).
-- **TEC-05:** API en Cloudflare Workers (`api/`) con Neon y Workers KV, y `RepositorioRemoto` en la app. **Sin
-  desplegar.**
+- **TEC-05:** API en Cloudflare Workers (`api/`) con Neon y Workers KV, publicada en
+  `https://creative-3d-builder-api.creative3dbuilder.workers.dev`; la app la usa (`creative3d.apiUrl`).
 - **INV-05:** `docs/inv-05-servicio-imagen-3d.md`.
 - 9 pruebas nuevas (16 en total).
 
