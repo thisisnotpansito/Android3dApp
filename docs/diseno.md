@@ -2,39 +2,76 @@
 
 > Entregable 2 · Guía 31 «UX y UI en tu app» y su roadmap de ocho paradas
 > (<https://ux-ui-appmovil-ecoreport.netlify.app/>). Versión de la app: **2.0** (PR #40). Medido el 18 de noviembre de
-> 2026 en un emulador Pixel 6 con Android 16. Lo que solo se puede responder con personas está marcado **pendiente**:
-> no se inventa.
+> 2026 en un emulador Pixel 6 con Android 16. La prueba con personas no se alcanzó a hacer: la sección del SUS usa
+> **datos de ejemplo** (marcados así) para mostrar el método y el cálculo, no resultados reales.
 
 ## Resumen
 
 | Parada | Pieza del kit | Estado | Dónde |
 |---|---|---|---|
-| 1 · Persona y escena | Ficha de persona + escena | **Supuestos** (0 de 3 entrevistas) | §1 |
+| 1 · Persona y escena | Ficha de persona + escena | Hecho: 3 de 3 entrevistas · 4 supuestos corregidos | §1 |
 | 2 · Recorrido y tarea | Recorrido + flujo con toques | Hecho | §2 · [`actores-eventos-flujo.md`](actores-eventos-flujo.md) |
 | 3 · Navegación | Árbol de pantallas justificado | Hecho | §3 |
-| 4 · Boceto → prototipo | Prototipo navegable en Figma 360 × 800 | **Pendiente** (hay app funcional, no Figma) | §4 |
+| 4 · Boceto → prototipo | Prototipo navegable en Figma 360 × 800 | Hecho: 6 bocetos en grises + 10 pantallas conectadas | §4 |
 | 5 · Sistema visual | Paleta medida + tema en el código | Hecho · 15 de 15 pares pasan | §5 |
 | 6 · Componentes y textos | Inventario de componentes + términos | Hecho | §6 |
 | 7 · Accesibilidad | Lista aprobada + prueba automática | Parcial: 5 de 10 puntos pasan; sin prueba automática | §7 |
-| 8 · Evaluar y mejorar | Auditoría + SUS + plan de mejora | Auditoría hecha (12 hallazgos); **SUS pendiente** | §8 |
+| 8 · Evaluar y mejorar | Auditoría + SUS + plan de mejora | Auditoría hecha (12 hallazgos); SUS con **datos de ejemplo** (prueba real pendiente) | §8 |
 
 ---
 
 ## 1 · Persona y escena
 
-| Campo | Contenido | ¿Confirmado? |
+### Entrevistas (3 de 3)
+
+Tres estudiantes de UNIPAZ, de tres carreras distintas. Entrevistas cortas, con preguntas sobre hechos pasados («la
+última vez que…»), hechas por Erick Martinez. No se grabaron: lo que sigue es la **síntesis de las notas del
+entrevistador**, no citas textuales.
+
+| | Víctor Gómez | Nicole Rodríguez | Edwin Jaimes |
+|---|---|---|---|
+| Carrera y semestre | Ingeniería Informática, 6.º | Obras Civiles, 8.º | Medicina Veterinaria, 8.º |
+| Edad | 19–20 años | ~22 años | ~20 años |
+| Teléfono | Xiaomi Redmi (serie 10, aprox.) | No se registró | No se registró |
+| Última vez que quiso ver algo en 3D | Por curiosidad: ver cómo se veía un objeto desde varios lados | Para un trabajo de la universidad: le pidieron renderizar elementos de un proyecto | Por curiosidad: convertir en 3D a un perro con una sola foto |
+| Qué hizo | Tomó varias fotos desde distintos lados y buscó una herramienta | Tomó fotos de todo y las subió a una herramienta para que se lo modelara | Tomó una sola foto y buscó en internet dónde subirla |
+| Dónde se trabó | No encontró cómo hacerlo | Estaba estresada: tenía poco tiempo para entregar | No encontró una herramienta completa para hacerlo |
+| Dónde estaba y cuánto tiempo tenía | En su casa, con tiempo libre | En su casa, contra el reloj de una entrega | En la universidad, sin límite de tiempo |
+| Conexión | Wifi de la casa | Wifi de la casa | Wifi de la universidad |
+
+### Supuestos → confirmados
+
+| Supuesto (Sprint 1) | Resultado | Evidencia |
 |---|---|---|
-| Persona | Estudiante de ingeniería informática, 20–24 años | Supuesto (examen del Sprint 1) |
-| Teléfono | Xiaomi de gama media, Android 13 o más | Supuesto |
-| Conexión | Inestable: datos móviles en el bus | Supuesto |
-| Quiere lograr | Ver en 3D un objeto o una idea sin computador ni saber modelar | Supuesto |
-| La frena hoy | Los programas 3D son pesados, complejos y piden PC | Supuesto |
-| Frase | «Se me ocurren geometrías en el bus pero no tengo dónde bocetarlas en 3D» | Supuesta |
+| El usuario es estudiante de **ingeniería informática** | **Corregido:** cualquier estudiante universitario que necesite mostrar un objeto en 3D (también civiles y veterinaria) | 3 de 3, de carreras distintas |
+| Quiere ver un objeto en 3D sin saber modelar | **Confirmado** | 3 de 3 buscaron una herramienta; ninguno modeló a mano |
+| Lo frena la complejidad de los programas 3D | **Confirmado y precisado:** lo que frena es **no encontrar una herramienta** que lo haga de punta a punta | Víctor y Edwin |
+| Parte de una sola foto | **Parcial:** 1 de 3 usó una sola foto; 2 de 3 tomaron varias desde distintos lados | Edwin (una) · Víctor y Nicole (varias) |
+| Usa datos móviles inestables en el bus | **No confirmado:** los 3 estaban con wifi, en casa o en la universidad | 3 de 3 |
+| Teléfono Xiaomi de gama media | Confirmado en 1 de 3 | Víctor |
+| Tiene poco tiempo | **Depende del uso:** con prisa cuando es para una entrega; sin prisa cuando es por curiosidad | Nicole vs. Víctor y Edwin |
 
-**Escena difícil y frecuente:** en el bus o en la cafetería, de pie o con una sola mano libre, el objeto sobre una mesa
-cualquiera (con textura, sombras y cosas alrededor), con poca batería y datos limitados. Tiene **menos de dos minutos**.
+### Ficha de persona (actualizada)
 
-> **Entrevistas: 0 de 3.** Es el issue INV-02 (#21). Mientras no se hagan, toda la ficha queda como supuesto.
+| Campo | Contenido |
+|---|---|
+| Persona | Estudiante universitario de 19 a 22 años, de cualquier carrera, que necesita mostrar o ver un objeto en 3D |
+| Dos usos | **Curiosidad** (sin prisa) y **trabajo académico** (con fecha de entrega) |
+| Teléfono y conexión | Android, con frecuencia Xiaomi; usa la app con wifi, en casa o en la universidad |
+| Quiere lograr | Ver el objeto desde todos los ángulos o mostrárselo a alguien, sin aprender a modelar |
+| La frena hoy | No encontrar **una sola herramienta** que haga todo; con fecha de entrega, el estrés y el poco tiempo |
+
+**Escena difícil y frecuente:** en casa, la noche antes de una entrega. El objeto está sobre un escritorio con cosas
+alrededor; hay que fotografiarlo y tener el modelo listo en pocos minutos para el trabajo.
+
+### Cambios en el backlog que salen de las entrevistas
+
+| Cambio | Por qué |
+|---|---|
+| El Objetivo del Producto dice «un estudiante universitario», no «de ingeniería» | Los 3 entrevistados eran de carreras distintas |
+| **HU-15 · Crear el modelo con varias fotos del objeto** (candidata, Should) | 2 de 3 tomaron varias fotos desde distintos lados |
+| La prioridad de D1 se confirma: la foto tiene fondo real (escritorio, animal en el piso) | Ninguno fotografió sobre un fondo liso |
+| Exportar o compartir el modelo (HU-09, HU-12) gana importancia | Nicole lo necesitaba para entregar un trabajo |
 
 ## 2 · Recorrido y tarea
 
@@ -84,8 +121,25 @@ Hallazgo D3: desde «Mis Modelos 3D» con datos no hay forma de crear un modelo 
 | Sin permiso | No aplica | La app no pide permisos peligrosos: la cámara la abre la app de cámara y la galería, el selector de Android |
 | Sin red | Parcial | Se muestra como error («Revisa tu conexión…»), sin un estado propio |
 
-> **Prototipo en Figma (360 × 800): pendiente.** El equipo pasó directo a la app funcional. Es una brecha frente a la
-> guía y a la Definición de Terminado de Exploración; le corresponde al líder de UX/UI.
+### Prototipo en Figma (360 × 800)
+
+Archivo **«Creative 3D Builder · Prototipo»**:
+<https://www.figma.com/design/QzG2urW4hacLPMkCXOt5l2/Creative-3D-Builder-%C2%B7-Prototipo> · modo presentación:
+<https://www.figma.com/proto/QzG2urW4hacLPMkCXOt5l2/Creative-3D-Builder-%C2%B7-Prototipo?node-id=1-16&starting-point-node-id=1%3A16&scaling=scale-down>
+
+| Sección del lienzo | Marcos | Qué muestra |
+|---|---|---|
+| 1 · Bocetos en grises | 6 | Inicio, Mis modelos, Detalle, Nuevo modelo, Vista 360° y el estado **sin permiso** (solo en boceto: la app no pide permisos) |
+| 2 · Prototipo navegable | 8 | Inicio → cargando → lista → detalle → vista 360°, e Inicio → nuevo → foto elegida → generando → detalle |
+| 3 · Estados de error y vacío | 2 | Lista vacía («Crear el primero») y sin red («Reintentar») |
+
+Dos flujos de inicio: **«Prototipo: crear y ver un modelo»** y **«Bocetos en grises»**. Cada botón tiene una zona de
+toque que navega a su pantalla. «Cargando» y «Generando» pasan solos a la siguiente (1,2 s y 2,5 s), como en la app.
+Las pantallas finales son capturas del emulador a 360 dp. Exportaciones en
+[`capturas/entregable-2/figma/`](capturas/entregable-2/figma/).
+
+> Nota de proceso: el prototipo se armó **después** de la app y no antes, como pide la guía. Sirve como documentación
+> y para la prueba con personas, no como validación previa del diseño.
 
 ## 5 · Sistema visual
 
@@ -206,8 +260,8 @@ entran al backlog** del siguiente sprint y se vuelven a medir.
 
 ### Prueba con personas y SUS
 
-**Pendiente.** Plan de la guía: **5 personas** (estudiantes, no del equipo), pensando en voz alta, **3 tareas**, y el
-cuestionario SUS al final (promedio de referencia: 68).
+Plan de la guía: **5 personas** (estudiantes, no del equipo), pensando en voz alta, **3 tareas**, y el cuestionario SUS
+al final (promedio de referencia: 68).
 
 | Tarea | Éxito si… |
 |---|---|
@@ -215,9 +269,35 @@ cuestionario SUS al final (promedio de referencia: 68).
 | T2 · Mira la parte de atrás del modelo | Gira el modelo en el visor |
 | T3 · Borra un modelo que no te sirvió | Confirma y vuelve a la lista sin ese modelo |
 
-| Participante | P1 | P2 | P3 | P4 | P5 | Promedio |
-|---|---|---|---|---|---|---|
-| SUS | — | — | — | — | — | — |
+> ⚠️ **DATOS DE EJEMPLO. La prueba con personas no se realizó.** Los participantes E1–E5 son ficticios y las
+> respuestas se escribieron para mostrar cómo se registra y se calcula la prueba. **No son resultados del producto y
+> no se usan para tomar decisiones.** Cuando se haga la prueba real, se reemplaza esta tabla.
+
+**Respuestas SUS de ejemplo** (1 = muy en desacuerdo, 5 = muy de acuerdo; ítems impares en positivo, pares en negativo):
+
+| Participante (ficticio) | Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 | Puntaje SUS |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| E1 | 4 | 2 | 4 | 1 | 4 | 2 | 4 | 2 | 4 | 2 | 77,5 |
+| E2 | 3 | 2 | 4 | 2 | 3 | 3 | 4 | 2 | 3 | 1 | 67,5 |
+| E3 | 4 | 1 | 5 | 1 | 4 | 2 | 5 | 1 | 4 | 1 | 90,0 |
+| E4 | 3 | 3 | 3 | 2 | 3 | 3 | 4 | 2 | 2 | 2 | 57,5 |
+| E5 | 4 | 2 | 4 | 1 | 4 | 3 | 4 | 2 | 3 | 2 | 72,5 |
+| **Promedio** | | | | | | | | | | | **73,0** |
+
+**Cálculo (Brooke):** a cada ítem impar se le resta 1; a cada ítem par se le resta su valor a 5. Se suman los 10
+resultados y se multiplica por 2,5. Ejemplo con E1: impares (3+3+3+3+3) + pares (3+4+3+3+3) = 31; 31 × 2,5 = **77,5**. Un promedio
+sobre 68 se lee como «por encima del promedio».
+
+**Registro de tareas de ejemplo** (mismo aviso: ficticio):
+
+| Tarea | Lo lograron sin ayuda | Lo que se esperaría observar (según la auditoría) |
+|---|---|---|
+| T1 · Crear | 4 de 5 | Dudar entre los dos botones de Inicio (D2); el resultado plano decepciona (D1) |
+| T2 · Ver la parte de atrás | 5 de 5 | El gesto de girar se entiende por la pista del visor |
+| T3 · Borrar | 4 de 5 | «Borrar modelo» queda abajo y se encuentra tarde |
+
+**Para hacer la prueba real:** usar el prototipo de Figma o la app en el Xiaomi, 5 estudiantes de otras carreras
+(como Víctor, Nicole y Edwin), unos 10 minutos por persona, y el formulario SUS en español. Responsable: líder de UX/UI.
 
 ## Evidencias
 
