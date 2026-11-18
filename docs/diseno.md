@@ -196,7 +196,7 @@ guía. Severidad: 1 cosmético · 2 menor · 3 mayor · 4 catástrofe.
 | D6 | No hay pasos ni tiempo estimado mientras se genera | H1 | Nuevo modelo | 2 | «Recortando… · Generando… · Guardando…» |
 | D7 | Los títulos de pantalla no están marcados como encabezado | ACC | Todas | 2 | `semantics { heading() }` |
 | D8 | «Volver» e «Inicio» son texto, no la flecha estándar de Android | H4 | Todas | 2 | Flecha atrás con descripción |
-| D11 | La base tiene modelos de prueba («o», «chongo») que se ven en la lista de la demo | H8 | Mis Modelos 3D | 2 | Que el equipo decida cuáles borrar antes de la Review |
+| D11 | La base tiene modelos de prueba («o», «chongo») que se ven en la lista de la demo | H8 | Mis Modelos 3D | 2 | **Decidido (18-nov):** se conservan como evidencia de las pruebas del equipo |
 | D12 | El visor 3D no tiene descripción para TalkBack ni otra forma de girar que el gesto | ACC | Vista 360° | 2 | Descripción + botones «Girar ←/→» |
 | D9 | «Malla · polígonos» e «Identificador» (un UUID largo) son datos técnicos | H2 | Detalle | 1 | Ocultar el id; explicar «polígonos» |
 | D10 | «Galería» no es verbo + objeto | H4 | Nuevo modelo | 1 | «Elegir de la galería» |
