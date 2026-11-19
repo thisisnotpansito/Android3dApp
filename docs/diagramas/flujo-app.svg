@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1130" width="960" height="1130" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748B"/>
+    </marker>
+    <marker id="fa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+    </marker>
+    <style>
+      .t  { font-size: 14px; font-weight: 600; fill: #0F172A; }
+      .s  { font-size: 11.5px; fill: #475569; }
+      .l  { font-size: 11.5px; fill: #334155; }
+      .la { font-size: 11.5px; fill: #B45309; }
+      .h  { font-size: 13px; font-weight: 700; fill: #334155; }
+      .hecho { fill: #EEF2FF; stroke: #4F46E5; stroke-width: 1.6; }
+      .ui    { fill: #FFFFFF; stroke: #94A3B8; stroke-width: 1.3; }
+      .falta { fill: #FFFBEB; stroke: #D97706; stroke-width: 1.5; stroke-dasharray: 6 4; }
+      .ext   { fill: #FDF2F8; stroke: #D97706; stroke-width: 1.5; stroke-dasharray: 6 4; }
+      .bd    { fill: #ECFDF5; stroke: #059669; stroke-width: 1.8; }
+      .a     { stroke: #64748B; stroke-width: 1.5; fill: none; marker-end: url(#f); }
+      .ad    { stroke: #D97706; stroke-width: 1.5; fill: none; stroke-dasharray: 6 4; marker-end: url(#fa); }
+    </style>
+  </defs>
+
+  <rect width="960" height="1130" fill="#FFFFFF"/>
+  <text x="30" y="34" style="font-size:18px;font-weight:700;fill:#0F172A">La interfaz ya recorre todo el flujo; generar el 3D y verlo en tu espacio aún no existen</text>
+  <text x="30" y="56" class="s">Flujo de Creative 3D Builder 1.0 (entregable 1) · dentro del teléfono a la izquierda, en la nube a la derecha</text>
+
+  <!-- contenedores -->
+  <rect x="30" y="75" width="590" height="980" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="46" y="97" class="h">Dentro del teléfono · Kotlin + Jetpack Compose</text>
+  <rect x="650" y="75" width="285" height="980" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="666" y="97" class="h">En la nube</text>
+
+  <!-- N1 Inicio -->
+  <rect x="245" y="112" width="200" height="50" rx="8" class="hecho"/>
+  <text x="345" y="133" text-anchor="middle" class="t">Pantalla de inicio</text>
+  <text x="345" y="151" text-anchor="middle" class="s">HU-03 · los tres pasos</text>
+
+  <!-- N2 Mis Modelos -->
+  <rect x="200" y="205" width="290" height="56" rx="8" class="hecho"/>
+  <text x="345" y="228" text-anchor="middle" class="t">Mis Modelos 3D</text>
+  <text x="345" y="247" text-anchor="middle" class="s">HU-05 · cargando · vacía · error · con datos</text>
+  <path d="M345 162 V203" class="a"/>
+  <text x="352" y="188" class="l">Ver mis modelos 3D</text>
+
+  <!-- N3 Detalle -->
+  <rect x="360" y="320" width="230" height="56" rx="8" class="hecho"/>
+  <text x="475" y="343" text-anchor="middle" class="t">Detalle del modelo</text>
+  <text x="475" y="362" text-anchor="middle" class="s">HU-04 · nombre · estado · fecha · polígonos</text>
+  <path d="M440 261 L475 318" class="a"/>
+  <text x="466" y="290" class="l">tocar uno</text>
+  <path d="M360 352 H345 V263" class="a"/>
+  <text x="338" y="312" text-anchor="end" class="l">Volver</text>
+
+  <!-- N4 Girar -->
+  <rect x="360" y="430" width="230" height="56" rx="8" class="falta"/>
+  <text x="475" y="453" text-anchor="middle" class="t">Girar en 360°</text>
+  <text x="475" y="472" text-anchor="middle" class="s">HU-01 · visor SceneView · entregable 2</text>
+  <path d="M475 376 V428" class="ad"/>
+
+  <!-- N5 AR -->
+  <rect x="360" y="540" width="230" height="56" rx="8" class="falta"/>
+  <text x="475" y="563" text-anchor="middle" class="t">Ver en tu espacio (AR)</text>
+  <text x="475" y="582" text-anchor="middle" class="s">HU-06 · ARCore · entregable 3</text>
+  <path d="M475 486 V538" class="ad"/>
+  <text x="482" y="516" class="la">si el teléfono tiene ARCore</text>
+
+  <!-- N6 Formulario -->
+  <rect x="50" y="320" width="250" height="76" rx="8" class="ui"/>
+  <text x="175" y="343" text-anchor="middle" class="t">Formulario «Nuevo modelo»</text>
+  <text x="175" y="362" text-anchor="middle" class="s">foto (cámara o galería) · nombre</text>
+  <text x="175" y="381" text-anchor="middle" class="s">hoy: solo interfaz</text>
+  <path d="M245 137 H175 V318" class="a"/>
+  <text x="168" y="230" text-anchor="end" class="l">Crear desde una foto</text>
+  <text x="168" y="246" text-anchor="end" class="l">o «Crear el primero»</text>
+
+  <!-- N7 ¿Foto elegida? -->
+  <polygon points="175,490 245,530 175,570 105,530" class="falta"/>
+  <text x="175" y="527" text-anchor="middle" class="t" style="font-size:12.5px">¿Foto</text>
+  <text x="175" y="543" text-anchor="middle" class="t" style="font-size:12.5px">elegida?</text>
+  <path d="M175 396 V488" class="ad"/>
+  <text x="182" y="450" class="la">HU-07 · entregable 2</text>
+  <path d="M105 530 H72 V398" class="ad"/>
+  <text x="60" y="480" text-anchor="end" class="la" transform="rotate(-90 60 480)">no: cámara negada → galería</text>
+
+  <!-- N8 Procesando -->
+  <rect x="50" y="650" width="250" height="56" rx="8" class="falta"/>
+  <text x="175" y="673" text-anchor="middle" class="t">Modelo en «Procesando»</text>
+  <text x="175" y="692" text-anchor="middle" class="s">HU-02 · foto a R2 · fila en modelos</text>
+  <path d="M175 570 V648" class="ad"/>
+  <text x="182" y="614" class="la">sí · «Generar modelo 3D»</text>
+
+  <!-- C3 Neon -->
+  <rect x="665" y="115" width="255" height="62" rx="8" class="bd"/>
+  <text x="792" y="139" text-anchor="middle" class="t">Neon · PostgreSQL 18</text>
+  <text x="792" y="158" text-anchor="middle" class="s">TEC-03 · 6 tablas · ✔ creada</text>
+  <text x="792" y="172" text-anchor="middle" class="s" style="font-size:10.5px">la app aún no se conecta</text>
+
+  <!-- C4 R2 -->
+  <rect x="665" y="230" width="255" height="56" rx="8" class="falta"/>
+  <text x="792" y="253" text-anchor="middle" class="t">Cloudflare R2</text>
+  <text x="792" y="272" text-anchor="middle" class="s">TEC-06 · fotos .jpg y modelos .glb</text>
+
+  <!-- C1 API -->
+  <rect x="665" y="650" width="255" height="56" rx="8" class="falta"/>
+  <text x="792" y="673" text-anchor="middle" class="t">API · Cloudflare Workers</text>
+  <text x="792" y="692" text-anchor="middle" class="s">TEC-05 · única pieza con credenciales</text>
+  <path d="M300 678 H663" class="ad"/>
+  <text x="482" y="670" text-anchor="middle" class="la">HTTPS · RepositorioRemoto</text>
+  <path d="M792 650 V288" class="ad"/>
+  <text x="800" y="470" class="la">guarda archivos</text>
+  <path d="M920 670 H928 V146 H922" class="ad"/>
+  <text x="945" y="420" text-anchor="middle" class="la" transform="rotate(-90 945 420)">lee y escribe datos</text>
+
+  <!-- C2 Servicio -->
+  <rect x="665" y="760" width="255" height="56" rx="8" class="ext"/>
+  <text x="792" y="783" text-anchor="middle" class="t">Servicio imagen → 3D</text>
+  <text x="792" y="802" text-anchor="middle" class="s">externo · INV-05 · devuelve .glb</text>
+  <path d="M792 706 V758" class="ad"/>
+
+  <!-- ¿Generó? -->
+  <polygon points="792,850 852,890 792,930 732,890" class="falta"/>
+  <text x="792" y="894" text-anchor="middle" class="t" style="font-size:12.5px">¿Generó?</text>
+  <path d="M792 816 V848" class="ad"/>
+  <path d="M732 890 H635 V348 H592" class="ad"/>
+  <text x="684" y="908" text-anchor="middle" class="la">sí: «Listo»</text>
+
+  <!-- C5 Error -->
+  <rect x="665" y="975" width="255" height="56" rx="8" class="falta"/>
+  <text x="792" y="998" text-anchor="middle" class="t">Modelo «Con error»</text>
+  <text x="792" y="1017" text-anchor="middle" class="s">HU-08 · reintentar: HU-14</text>
+  <path d="M792 930 V973" class="ad"/>
+  <text x="800" y="956" class="la">no</text>
+
+  <!-- leyenda -->
+  <rect x="30" y="1072" width="18" height="14" rx="3" class="hecho"/>
+  <text x="56" y="1084" class="s">Construido en el entregable 1</text>
+  <rect x="250" y="1072" width="18" height="14" rx="3" class="ui"/>
+  <text x="276" y="1084" class="s">Solo interfaz</text>
+  <rect x="390" y="1072" width="18" height="14" rx="3" class="bd"/>
+  <text x="416" y="1084" class="s">Base de datos creada</text>
+  <rect x="580" y="1072" width="18" height="14" rx="3" class="falta"/>
+  <text x="606" y="1084" class="s">Borde punteado: todavía no existe</text>
+  <rect x="820" y="1072" width="18" height="14" rx="3" class="ext"/>
+  <text x="846" y="1084" class="s">Tinte: externo</text>
+  <text x="30" y="1112" class="s">Flujo de Creative 3D Builder 1.0 · Los Chontos · noviembre de 2026</text>
+</svg>

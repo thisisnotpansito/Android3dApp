@@ -60,6 +60,7 @@ el entregable 2) y pagos.
 
 | Tema | Archivo |
 |---|---|
+| **Actores, eventos, flujo y arquitectura** (con diagramas) | [`docs/actores-eventos-flujo.md`](docs/actores-eventos-flujo.md) · [PDF](docs/actores-eventos-flujo.pdf) |
 | Visión, objetivo, MoSCoW y cambio de rumbo | [`docs/vision-y-alcance.md`](docs/vision-y-alcance.md) |
 | Backlog ordenado y estimado | [`docs/backlog.md`](docs/backlog.md) |
 | Tablero de GitHub Projects | [`docs/tablero.md`](docs/tablero.md) |
