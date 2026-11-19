@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <!-- Solo la carpeta de fotos de la caché: la cámara no ve nada más de la app. -->
+    <!-- Fotos tomadas con la cámara -->
     <cache-path name="fotos" path="fotos/" />
+    <!-- Modelos GLB exportados para compartir -->
+    <cache-path name="exportados" path="exportados/" />
 </paths>

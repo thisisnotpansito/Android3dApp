@@ -51,6 +51,14 @@ class AlmacenLocal(private val carpeta: File) {
                 if (!File(dirModelos, "${m.id}.glb").exists()) {
                     assets.open("demos/${m.id}.glb").use { entrada -> File(dirModelos, "${m.id}.glb").outputStream().use { entrada.copyTo(it) } }
                 }
+                
+                // Intentar copiar la imagen para la preview
+                val dirPreviews = File(carpeta, "previews").apply { mkdirs() }
+                if (!File(dirPreviews, "${m.id}.jpg").exists()) {
+                    runCatching {
+                        assets.open("demos/${m.id}.jpg").use { entrada -> File(dirPreviews, "${m.id}.jpg").outputStream().use { entrada.copyTo(it) } }
+                    }
+                }
                 m
             }.getOrNull()
         }
@@ -59,6 +67,7 @@ class AlmacenLocal(private val carpeta: File) {
     private fun aJson(m: Modelo3D) = JSONObject()
         .put("id", m.id).put("nombre", m.nombre).put("creadoEnMillis", m.creadoEnMillis)
         .put("estado", m.estado.name).put("poligonos", m.poligonos ?: JSONObject.NULL)
+        .put("tienePreview", m.tienePreview)
 
     private fun desdeJson(o: JSONObject) = Modelo3D(
         id = o.getString("id"),
@@ -67,5 +76,6 @@ class AlmacenLocal(private val carpeta: File) {
         estado = EstadoModelo.valueOf(o.optString("estado", "LISTO")),
         poligonos = if (o.isNull("poligonos")) null else o.getInt("poligonos"),
         tieneArchivo3D = true,
+        tienePreview = o.optBoolean("tienePreview", false)
     )
 }

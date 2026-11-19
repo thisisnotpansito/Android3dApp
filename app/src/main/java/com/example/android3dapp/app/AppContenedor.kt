@@ -3,6 +3,7 @@ package com.example.android3dapp.app
 import android.content.Context
 import com.example.android3dapp.BuildConfig
 import com.example.android3dapp.data.AlmacenLocal
+import com.example.android3dapp.data.GestorPreviews
 import com.example.android3dapp.data.ModeloRepository
 import com.example.android3dapp.data.RepositorioRemoto
 import com.example.android3dapp.data.RepositorioSimulado
@@ -26,11 +27,17 @@ object AppContenedor {
     lateinit var repositorio: ModeloRepository
         private set
 
+    lateinit var gestorPreviews: GestorPreviews
+        private set
+
     val generador: GeneradorModelo3D = GeneradorInflado()
 
     /** Se llama una vez, al abrir la app (MainActivity). */
     fun iniciar(context: Context) {
         if (::repositorio.isInitialized) return
+        
+        gestorPreviews = GestorPreviews(context)
+        
         repositorio = if (usaApi) {
             RepositorioRemoto(BuildConfig.API_URL)
         } else {

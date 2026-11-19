@@ -16,7 +16,7 @@ sealed interface VisorUiState {
     data object Cargando : VisorUiState
     data object Error : VisorUiState
     /** El .glb ya está en el teléfono, listo para el visor. */
-    data class Listo(val archivo: File) : VisorUiState
+    data class Listo(val archivo: File, val entornoIndex: Int = 0, val autoRotate: Boolean = false, val immersive: Boolean = false) : VisorUiState
 }
 
 /** HU-01 · Baja el .glb del modelo (o lo toma de la caché) para girarlo en 360°. */
@@ -50,4 +50,21 @@ class VisorViewModel(
             }
         }
     }
+    
+    fun toggleAutoRotate() {
+        val current = _estado.value as? VisorUiState.Listo ?: return
+        _estado.value = current.copy(autoRotate = !current.autoRotate)
+    }
+    
+    fun cycleEntorno() {
+        val current = _estado.value as? VisorUiState.Listo ?: return
+        _estado.value = current.copy(entornoIndex = (current.entornoIndex + 1) % 3)
+    }
+    
+    fun toggleImmersive() {
+        val current = _estado.value as? VisorUiState.Listo ?: return
+        _estado.value = current.copy(immersive = !current.immersive)
+    }
+    
+    fun getModeloId(): String = id
 }

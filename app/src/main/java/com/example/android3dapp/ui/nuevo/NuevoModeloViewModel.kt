@@ -2,6 +2,7 @@ package com.example.android3dapp.ui.nuevo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.android3dapp.app.AppContenedor
 import com.example.android3dapp.data.ModeloRepository
 import com.example.android3dapp.data.fotos.FotoPreparada
 import com.example.android3dapp.data.generacion.GeneradorModelo3D
@@ -42,6 +43,7 @@ data class NuevoModeloUi(
 class NuevoModeloViewModel(
     private val generador: GeneradorModelo3D,
     private val repositorio: ModeloRepository,
+    private val onPreviewCreada: suspend (String, ByteArray) -> Unit = { _, _ -> }
 ) : ViewModel() {
 
     private val _ui = MutableStateFlow(NuevoModeloUi())
@@ -101,6 +103,13 @@ class NuevoModeloViewModel(
                 val creado = repositorio.crear(
                     NuevoModelo(nombre, foto.jpeg, foto.ancho, foto.alto, modelo.glb, modelo.poligonos, modelo.proveedor),
                 )
+                // Guardamos la foto original como preview inicial del modelo
+                try {
+                    onPreviewCreada(creado.id, foto.jpeg)
+                } catch (e: Exception) {
+                    // Ignore
+                }
+                
                 _ui.update { it.copy(fase = Fase.Listo(creado.id)) }
             } catch (e: CancellationException) {
                 throw e

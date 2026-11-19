@@ -25,8 +25,10 @@ data class Modelo3D(
     val poligonos: Int?,
     /** Tiene su archivo .glb (tabla `archivos_modelo`): se puede girar en 360°. */
     val tieneArchivo3D: Boolean = false,
-    /** Mensaje del último intento fallido (tabla `trabajos_generacion`). */
+    /** HU-14 · Mensaje del último intento fallido. */
     val mensajeError: String? = null,
+    /** Indica si se le ha capturado una preview (en GestorPreviews). */
+    val tienePreview: Boolean = false,
 )
 
 /** HU-07 + HU-02 · Lo que se envía para guardar un modelo recién generado. */

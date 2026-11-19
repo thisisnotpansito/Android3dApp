@@ -59,6 +59,7 @@ class RepositorioSimulado(
             estado = EstadoModelo.LISTO,
             poligonos = nuevo.poligonos,
             tieneArchivo3D = true,
+            tienePreview = true // Tendrá preview generada automáticamente
         )
         creados.add(0, modelo)
         if (almacen != null) withContext(Dispatchers.IO) {

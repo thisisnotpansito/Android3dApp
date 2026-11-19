@@ -77,7 +77,15 @@ fun Navegacion() {
         }
         composable(Rutas.NUEVO) {
             val vm: NuevoModeloViewModel = viewModel(
-                factory = viewModelFactory { initializer { NuevoModeloViewModel(AppContenedor.generador, AppContenedor.repositorio) } },
+                factory = viewModelFactory { 
+                    initializer { 
+                        NuevoModeloViewModel(
+                            AppContenedor.generador, 
+                            AppContenedor.repositorio,
+                            onPreviewCreada = { id, bytes -> AppContenedor.gestorPreviews.guardarPreview(id, bytes) }
+                        ) 
+                    } 
+                },
             )
             val lector = remember { LectorFotos(context.applicationContext) }
             NuevoModeloScreen(
