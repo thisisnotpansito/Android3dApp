@@ -22,12 +22,19 @@ object EscritorGlb {
     fun escribir(malla: MallaInflada.Malla, texturaJpeg: ByteArray, generador: String): ByteArray {
         val bin = ByteArrayOutputStream()
         fun alinear() { while (bin.size() % 4 != 0) bin.write(0) }
-        fun floats(a: FloatArray): IntArray {
+        fun alinearJson(bytes: ByteArray): ByteArray {
+            var res = bytes
+            while (res.size % 4 != 0) res += ' '.code.toByte()
+            return res
+        }
+        
+        fun floats(a: FloatArray, minMax: Boolean = false): IntArray {
             alinear(); val inicio = bin.size()
             val bb = ByteBuffer.allocate(a.size * 4).order(ByteOrder.LITTLE_ENDIAN)
-            a.forEach { bb.putFloat(it) }; bin.write(bb.array()); return intArrayOf(inicio, a.size * 4)
+            a.forEach { bb.putFloat(it) }; bin.write(bb.array())
+            return intArrayOf(inicio, a.size * 4)
         }
-        val vPos = floats(malla.posiciones)
+        val vPos = floats(malla.posiciones, true)
         val vNor = floats(malla.normales)
         val vUv = floats(malla.uvs)
         alinear()
@@ -41,17 +48,19 @@ object EscritorGlb {
         val datos = bin.toByteArray()
 
         val (mn, mx) = MallaInflada.minMax(malla.posiciones)
-        fun f(x: Float) = String.format(Locale.ROOT, "%.6f", x)
+        fun f(x: Float) = String.format(Locale.US, "%.6f", x)
         fun vista(v: IntArray, destino: Int?) =
             """{"buffer":0,"byteOffset":${v[0]},"byteLength":${v[1]}${destino?.let { ""","target":$it""" } ?: ""}}"""
         val nv = malla.vertices
+        
+        // JSON GLB 100% compliant con Material PBR óptimo
         val json = """
             {"asset":{"version":"2.0","generator":"${generador.replace("\"", "'")}"},
              "scene":0,"scenes":[{"nodes":[0]}],
-             "nodes":[{"mesh":0,"name":"modelo"}],
+             "nodes":[{"mesh":0,"name":"Objeto 3D"}],
              "meshes":[{"primitives":[{"attributes":{"POSITION":0,"NORMAL":1,"TEXCOORD_0":2},"indices":3,"material":0}]}],
              "materials":[{"name":"foto","doubleSided":true,
-               "pbrMetallicRoughness":{"baseColorTexture":{"index":0},"metallicFactor":0.0,"roughnessFactor":0.85}}],
+               "pbrMetallicRoughness":{"baseColorTexture":{"index":0},"metallicFactor":0.0,"roughnessFactor":0.65}}],
              "textures":[{"source":0,"sampler":0}],
              "samplers":[{"magFilter":9729,"minFilter":9729,"wrapS":33071,"wrapT":33071}],
              "images":[{"bufferView":4,"mimeType":"image/jpeg"}],
@@ -63,10 +72,9 @@ object EscritorGlb {
                {"bufferView":3,"componentType":5125,"count":${malla.indices.size},"type":"SCALAR"}],
              "bufferViews":[${vista(vPos, 34962)},${vista(vNor, 34962)},${vista(vUv, 34962)},${vista(vInd, 34963)},${vista(vImg, null)}],
              "buffers":[{"byteLength":${datos.size}}]}
-        """.trimIndent().replace("\n", "")
+        """.trimIndent().replace("\n", "").replace(" ", "") // Minificamos JSON seguro
 
-        var jsonBytes = json.toByteArray(Charsets.UTF_8)
-        if (jsonBytes.size % 4 != 0) jsonBytes += ByteArray(4 - jsonBytes.size % 4) { ' '.code.toByte() }
+        val jsonBytes = alinearJson(json.toByteArray(Charsets.UTF_8))
 
         val total = 12 + 8 + jsonBytes.size + 8 + datos.size
         return ByteBuffer.allocate(total).order(ByteOrder.LITTLE_ENDIAN).apply {

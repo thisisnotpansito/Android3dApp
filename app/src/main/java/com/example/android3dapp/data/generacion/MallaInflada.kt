@@ -39,17 +39,17 @@ object MallaInflada {
     private const val GROSOR = 0.16f
 
     /**
-     * @param argb píxeles en formato ARGB (como `Bitmap.getPixels`), ya reducidos
-     *             (unos 120 px por lado bastan: más da mallas pesadas para el teléfono).
+     * @param argb píxeles en formato ARGB (como `Bitmap.getPixels`).
+     * @param grosorFondo 1f = inflado equilibrado, <1f sutil, >1f exagerado.
      */
-    fun construir(argb: IntArray, ancho: Int, alto: Int): Malla {
+    fun construir(argb: IntArray, ancho: Int, alto: Int, grosor: Float = 1.0f): Malla {
         require(ancho >= 8 && alto >= 8 && argb.size == ancho * alto) { "Imagen demasiado pequeña" }
         var mascara = separarObjeto(argb, ancho, alto)
         val area = mascara.count { it }
         val usoSilueta = area >= ancho * alto * 0.03 && area <= ancho * alto * 0.97
         if (!usoSilueta) mascara = laminaConMargen(ancho, alto)
         val distancia = distanciaAlBorde(mascara, ancho, alto)
-        return mallar(mascara, distancia, ancho, alto, usoSilueta)
+        return mallar(mascara, distancia, ancho, alto, usoSilueta, grosor)
     }
 
     // ------------------------------------------------------------------ 1. silueta
@@ -149,10 +149,11 @@ object MallaInflada {
 
     // ------------------------------------------------------------------ 3. malla
 
-    private fun mallar(m: BooleanArray, dist: FloatArray, w: Int, h: Int, usoSilueta: Boolean): Malla {
+    private fun mallar(m: BooleanArray, dist: FloatArray, w: Int, h: Int, usoSilueta: Boolean, factorGrosor: Float): Malla {
         val dmax = max(1f, dist.max())
         val escala = max(w, h).toFloat()
-        val grosor = GROSOR * escala
+        // Ajustamos la curva base (GROSOR) y la centramos exactamente en Z=0
+        val grosorBase = GROSOR * escala * factorGrosor
         val cx = (w - 1) / 2f; val cy = (h - 1) / 2f
 
         // Un vértice adelante y otro atrás por cada píxel del objeto.
@@ -165,13 +166,19 @@ object MallaInflada {
             val x = i % w; val y = i / w
             val borde = esBorde(m, x, y, w, h)
             val t = (dist[i] / dmax).coerceIn(0f, 1f)
-            // Perfil circular: sube rápido desde el borde y se aplana en el centro.
-            val z = if (borde) 0f else grosor * sqrt(1f - (1f - t) * (1f - t))
-            val px = (x - cx) / escala; val py = -(y - cy) / escala; val pz = z / escala
+            
+            // Perfil de inflado orgánico gaussiano/elíptico
+            val relieve = if (borde) 0f else grosorBase * (1f - (1f - t) * (1f - t) * (1f - t))
+            val px = (x - cx) / escala; val py = -(y - cy) / escala; val pz = relieve / escala
+            
             for (lado in 0..1) {
                 val v = k + lado * n
-                pos[v * 3] = px; pos[v * 3 + 1] = py; pos[v * 3 + 2] = if (lado == 0) pz else -pz
-                uv[v * 2] = (x + 0.5f) / w; uv[v * 2 + 1] = (y + 0.5f) / h
+                pos[v * 3] = px
+                pos[v * 3 + 1] = py
+                pos[v * 3 + 2] = if (lado == 0) pz else -pz
+                // UVs normalizadas y alineadas a glTF (sin estiramientos raros)
+                uv[v * 2] = (x + 0.5f) / w
+                uv[v * 2 + 1] = 1f - (y + 0.5f) / h
             }
         }
 
