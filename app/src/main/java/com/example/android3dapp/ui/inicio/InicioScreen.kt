@@ -14,9 +14,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.ViewInAr
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -26,7 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
-/** HU-03 · Pantalla de inicio: qué hace la app y cómo empezar. */
+/** HU-03 · Pantalla de Instrucciones: qué hace la app y cómo empezar. */
 @Composable
 fun InicioScreen(alVerModelos: () -> Unit, alCrear: () -> Unit) {
     Column(
@@ -34,39 +40,67 @@ fun InicioScreen(alVerModelos: () -> Unit, alCrear: () -> Unit) {
             .fillMaxSize()
             .statusBarsPadding()
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 20.dp, vertical = 24.dp),
+            .padding(horizontal = 24.dp, vertical = 24.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
-        Text("Creative 3D Builder", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+        Text("¿Cómo funciona?", style = MaterialTheme.typography.headlineMedium, color = MaterialTheme.colorScheme.primary)
         Text(
-            "De una foto a un modelo 3D que puedes girar y poner en tu espacio.",
+            "Convierte tus fotos en modelos 3D detallados listos para explorar y colocar en tu espacio.",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        Spacer(Modifier.height(4.dp))
-        Paso(1, "Toma una foto", "Fotografía el objeto con la cámara o elígelo de la galería.", "Disponible")
-        Paso(2, "Gíralo en 360°", "La app genera el modelo 3D y lo puedes ver desde todos sus ángulos.", "Disponible")
-        Paso(3, "Míralo en tu espacio", "Ponlo sobre una mesa o el piso a través de la cámara.", "Entregable 3")
+        
         Spacer(Modifier.height(8.dp))
-        Button(onClick = alVerModelos, modifier = Modifier.fillMaxWidth()) { Text("Ver mis modelos 3D") }
-        OutlinedButton(onClick = alCrear, modifier = Modifier.fillMaxWidth()) { Text("Crear desde una foto") }
+        
+        Paso(1, "Toma una foto", "Usa la cámara o galería. Mejor en un lugar iluminado.", "Disponible")
+        Paso(2, "Magia en 3D", "Generamos el modelo para que lo veas desde todos sus ángulos.", "Disponible")
+        Paso(3, "Realidad Aumentada", "Colócalo sobre tu escritorio o el piso a través de tu cámara.", "Próximamente")
+        
+        Spacer(Modifier.height(32.dp))
+        
+        Button(
+            onClick = alCrear, 
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            shape = RoundedCornerShape(16.dp)
+        ) { 
+            Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(24.dp))
+            Spacer(Modifier.size(8.dp))
+            Text("Crear nuevo modelo", style = MaterialTheme.typography.titleMedium) 
+        }
+        
+        OutlinedButton(
+            onClick = alVerModelos, 
+            modifier = Modifier.fillMaxWidth().height(56.dp),
+            shape = RoundedCornerShape(16.dp)
+        ) { 
+            Icon(Icons.Default.ViewInAr, contentDescription = null, modifier = Modifier.size(24.dp))
+            Spacer(Modifier.size(8.dp))
+            Text("Ver mis modelos 3D", style = MaterialTheme.typography.titleMedium) 
+        }
     }
 }
 
 @Composable
 private fun Paso(numero: Int, titulo: String, detalle: String, entrega: String) {
-    Card(Modifier.fillMaxWidth()) {
-        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.Top) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+        shape = RoundedCornerShape(20.dp)
+    ) {
+        Row(Modifier.padding(20.dp), verticalAlignment = Alignment.Top) {
             Box(
-                Modifier.size(36.dp).background(MaterialTheme.colorScheme.primary, CircleShape),
+                Modifier
+                    .size(44.dp)
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f), CircleShape),
                 contentAlignment = Alignment.Center,
             ) {
-                Text("$numero", color = MaterialTheme.colorScheme.onPrimary, fontWeight = FontWeight.Bold)
+                Text("$numero", color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Black, style = MaterialTheme.typography.titleLarge)
             }
-            Column(Modifier.padding(start = 12.dp).weight(1f)) {
-                Text(titulo, style = MaterialTheme.typography.titleMedium)
-                Text(detalle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                Text(entrega, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.primary, modifier = Modifier.padding(top = 4.dp))
+            Column(Modifier.padding(start = 16.dp).weight(1f)) {
+                Text(titulo, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text(detalle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 6.dp))
+                Text(entrega, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.tertiary, modifier = Modifier.padding(top = 10.dp))
             }
         }
     }

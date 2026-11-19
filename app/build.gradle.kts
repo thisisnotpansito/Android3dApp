@@ -62,4 +62,5 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     // Visor 3D y realidad aumentada (entregables 2 y 3)
     implementation(libs.sceneview)
+    implementation("androidx.compose.material:material-icons-extended:1.6.0")
 }

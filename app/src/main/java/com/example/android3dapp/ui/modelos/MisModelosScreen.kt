@@ -2,18 +2,23 @@ package com.example.android3dapp.ui.modelos
 
 import android.content.pm.ApplicationInfo
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -26,9 +31,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.android3dapp.data.Escenario
 import com.example.android3dapp.domain.Modelo3D
@@ -54,7 +61,7 @@ fun MisModelosScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Mis Modelos 3D") },
+                title = { Text("Mis Modelos 3D", fontWeight = FontWeight.SemiBold) },
                 navigationIcon = { TextButton(onClick = alVolver) { Text("Inicio") } },
                 actions = { if (esDepuracion && vm.admiteEscenarios) SelectorEscenario(vm::elegirEscenario) },
             )
@@ -87,17 +94,29 @@ fun MisModelosScreen(
 
 @Composable
 private fun ListaModelos(modelos: List<Modelo3D>, alAbrirModelo: (String) -> Unit) {
-    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = 16.dp)) {
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp),
+        contentPadding = PaddingValues(vertical = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
         items(modelos, key = { it.id }) { modelo ->
-            ListItem(
-                headlineContent = { Text(modelo.nombre) },
-                supportingContent = {
-                    Text("${formatearFecha(modelo.creadoEnMillis)} · ${formatearPoligonos(modelo.poligonos)}")
-                },
-                trailingContent = { EtiquetaEstado(modelo.estado) },
-                modifier = Modifier.clickable { alAbrirModelo(modelo.id) },
-            )
-            HorizontalDivider()
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { alAbrirModelo(modelo.id) },
+                colors = CardDefaults.cardColors(containerColor = androidx.compose.material3.MaterialTheme.colorScheme.surface),
+                elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                ListItem(
+                    colors = ListItemDefaults.colors(containerColor = Color.Transparent),
+                    headlineContent = { Text(modelo.nombre, fontWeight = FontWeight.SemiBold) },
+                    supportingContent = {
+                        Text("${formatearFecha(modelo.creadoEnMillis)} · ${formatearPoligonos(modelo.poligonos)}")
+                    },
+                    trailingContent = { EtiquetaEstado(modelo.estado) }
+                )
+            }
         }
     }
 }

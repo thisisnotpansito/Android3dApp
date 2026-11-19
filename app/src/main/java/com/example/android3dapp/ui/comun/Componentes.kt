@@ -31,7 +31,7 @@ fun Aviso(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(titulo, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center)
+        Text(titulo, style = MaterialTheme.typography.titleLarge, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.primary)
         Text(
             detalle,
             style = MaterialTheme.typography.bodyMedium,
@@ -43,21 +43,25 @@ fun Aviso(
     }
 }
 
-/** Pastilla de color con el estado del modelo. */
+/** Pastilla de color con el estado del modelo usando estrictamente los 3 tonos de la marca. */
 @Composable
 fun EtiquetaEstado(estado: EstadoModelo, modifier: Modifier = Modifier) {
     val (fondo, texto) = when (estado) {
-        EstadoModelo.LISTO -> Color(0xFFD1FAE5) to Color(0xFF065F46)
-        EstadoModelo.PROCESANDO -> Color(0xFFFEF3C7) to Color(0xFF92400E)
-        EstadoModelo.ERROR -> Color(0xFFFEE2E2) to Color(0xFF991B1B)
-        EstadoModelo.BORRADOR -> Color(0xFFE5E7EB) to Color(0xFF374151)
+        // Tono secundario (Teal) para el éxito
+        EstadoModelo.LISTO -> MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f) to MaterialTheme.colorScheme.secondary
+        // Tono acento (Ámbar) para procesamiento
+        EstadoModelo.PROCESANDO -> MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f) to MaterialTheme.colorScheme.tertiary
+        // Tono principal (Índigo) para borradores
+        EstadoModelo.BORRADOR -> MaterialTheme.colorScheme.primary.copy(alpha = 0.15f) to MaterialTheme.colorScheme.primary
+        // Usamos el error nativo del tema para problemas sin ensuciar la paleta base
+        EstadoModelo.ERROR -> MaterialTheme.colorScheme.errorContainer to MaterialTheme.colorScheme.error
     }
     Surface(color = fondo, shape = MaterialTheme.shapes.small, modifier = modifier) {
         Text(
             estado.etiqueta(),
             color = texto,
             style = MaterialTheme.typography.labelMedium,
-            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
         )
     }
 }

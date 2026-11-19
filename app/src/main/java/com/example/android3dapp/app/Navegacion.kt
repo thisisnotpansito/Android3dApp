@@ -24,6 +24,7 @@ import com.example.android3dapp.ui.visor.VisorViewModel
 
 /** Rutas de la app. El detalle se abre por id: `modelos/{id}`; el visor, `modelos/{id}/visor`. */
 object Rutas {
+    const val BIENVENIDA = "bienvenida"
     const val INICIO = "inicio"
     const val MODELOS = "modelos"
     const val DETALLE = "modelos/{id}"
@@ -37,7 +38,12 @@ object Rutas {
 fun Navegacion() {
     val nav = rememberNavController()
     val context = LocalContext.current
-    NavHost(navController = nav, startDestination = Rutas.INICIO) {
+    NavHost(navController = nav, startDestination = Rutas.BIENVENIDA) {
+        composable(Rutas.BIENVENIDA) {
+            com.example.android3dapp.ui.inicio.BienvenidaScreen(
+                alComenzar = { nav.navigate(Rutas.INICIO) { popUpTo(Rutas.BIENVENIDA) { inclusive = true } } }
+            )
+        }
         composable(Rutas.INICIO) {
             InicioScreen(
                 alVerModelos = { nav.navigate(Rutas.MODELOS) },
